@@ -12,15 +12,21 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
+
 import it.jaschke.alexandria.api.Callback;
+import it.jaschke.alexandria.events.ScanFragmentSelectedEvent;
 
 
-public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks, Callback {
+public class MainActivity extends ActionBarActivity implements ScanISBNFragment.OnFragmentInteractionListener, NavigationDrawerFragment.NavigationDrawerCallbacks, Callback {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -37,6 +43,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     public static final String MESSAGE_EVENT = "MESSAGE_EVENT";
     public static final String MESSAGE_KEY = "MESSAGE_EXTRA";
 
+    public static Bus bus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +55,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
             setContentView(R.layout.activity_main);
         }
 
-        messageReciever = new MessageReciever();
+        bus = new Bus();
+        bus.register(this);
+
+        messageReciever = new MessageReceiver();
         IntentFilter filter = new IntentFilter(MESSAGE_EVENT);
         LocalBroadcastManager.getInstance(this).registerReceiver(messageReciever,filter);
 
@@ -95,6 +106,21 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(title);
+    }
+
+    /**
+     * @param event standard event
+     * @see AddBook#onCreateView(LayoutInflater, ViewGroup, Bundle)
+     * called on click
+     */
+    @Subscribe
+    public void scanFragmentSelected(ScanFragmentSelectedEvent event) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment nextFragment = new ScanISBNFragment();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, nextFragment)
+                .addToBackStack((String) title)
+                .commit();
     }
 
 
@@ -151,7 +177,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
     }
 
-    private class MessageReciever extends BroadcastReceiver {
+    @Override
+    public void onFragmentInteraction(String qrCode) {
+        Toast.makeText(this, qrCode, Toast.LENGTH_SHORT).show();
+    }
+
+    private class MessageReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             if(intent.getStringExtra(MESSAGE_KEY)!=null){
