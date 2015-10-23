@@ -30,7 +30,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
+        <activity
+            android:label="@string/title_activity_scan"
+            android:name=".ScanISBNActivity" />
 
 
         <provider

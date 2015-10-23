@@ -1,14 +1,12 @@
 package it.jaschke.alexandria;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import net.sourceforge.zbar.Config;
 import net.sourceforge.zbar.Image;
@@ -22,15 +20,14 @@ import it.jaschke.alexandria.CameraPreview.CameraPreview;
 /**
  * Handles the QR scanning
  */
-public class ScanISBNFragment extends android.support.v4.app.Fragment {
+public class ScanISBNActivity extends Activity {
 
-    private OnFragmentInteractionListener mListener;
 
     private Camera mCamera;
     private CameraPreview mPreview;
     private Handler autoFocusHandler;
+    public static final String ISBN_EXTRA = "isbn_extra";
 
-    TextView scanText;
 
     ImageScanner scanner;
 
@@ -45,18 +42,14 @@ public class ScanISBNFragment extends android.support.v4.app.Fragment {
         System.loadLibrary("iconv");
     }
 
-    public ScanISBNFragment() {
+    public ScanISBNActivity() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_scan_isbn, container, false);
-//
-//        bus = new AndroidBus();
-//        bus.register(this);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_scan_isbn);
 
         autoFocusHandler = new Handler();
         mCamera = getCameraInstance();
@@ -66,14 +59,10 @@ public class ScanISBNFragment extends android.support.v4.app.Fragment {
         scanner.setConfig(0, Config.X_DENSITY, 3);
         scanner.setConfig(0, Config.Y_DENSITY, 3);
 
-        mPreview = new CameraPreview(this.getActivity(), mCamera, previewCb, autoFocusCB);
-        FrameLayout preview = (FrameLayout) view.findViewById(R.id.cameraPreview);
+        mPreview = new CameraPreview(this, mCamera, previewCb, autoFocusCB);
+        FrameLayout preview = (FrameLayout) findViewById(R.id.cameraPreview);
         preview.addView(mPreview);
 
-
-        setHasOptionsMenu(true);
-
-        return view;
     }
 
     @Override
@@ -147,24 +136,11 @@ public class ScanISBNFragment extends android.support.v4.app.Fragment {
      * Temporal validation process for when the user finishes scanning a QR code
      */
     private void startValidationProcess(String isbnCode) {
-        mListener.onFragmentInteraction(isbnCode);
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+        Toast.makeText(this, isbnCode, Toast.LENGTH_SHORT).show();
+        Intent intent = getIntent();
+        intent.putExtra(ISBN_EXTRA, isbnCode);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     @Override
@@ -203,20 +179,5 @@ public class ScanISBNFragment extends android.support.v4.app.Fragment {
 //        db.show();
 //    }
 
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(String qrCode);
-    }
 
 }

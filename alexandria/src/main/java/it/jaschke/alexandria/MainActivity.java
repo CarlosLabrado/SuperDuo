@@ -12,21 +12,17 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
 
 import it.jaschke.alexandria.api.Callback;
-import it.jaschke.alexandria.events.ScanFragmentSelectedEvent;
 
 
-public class MainActivity extends ActionBarActivity implements ScanISBNFragment.OnFragmentInteractionListener, NavigationDrawerFragment.NavigationDrawerCallbacks, Callback {
+public class MainActivity extends ActionBarActivity implements ScanISBNActivity.OnFragmentInteractionListener, NavigationDrawerFragment.NavigationDrawerCallbacks, Callback {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -38,7 +34,7 @@ public class MainActivity extends ActionBarActivity implements ScanISBNFragment.
      */
     private CharSequence title;
     public static boolean IS_TABLET = false;
-    private BroadcastReceiver messageReciever;
+    private BroadcastReceiver broadcastReceiver;
 
     public static final String MESSAGE_EVENT = "MESSAGE_EVENT";
     public static final String MESSAGE_KEY = "MESSAGE_EXTRA";
@@ -58,9 +54,9 @@ public class MainActivity extends ActionBarActivity implements ScanISBNFragment.
         bus = new Bus();
         bus.register(this);
 
-        messageReciever = new MessageReceiver();
+        broadcastReceiver = new MessageReceiver();
         IntentFilter filter = new IntentFilter(MESSAGE_EVENT);
-        LocalBroadcastManager.getInstance(this).registerReceiver(messageReciever,filter);
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, filter);
 
         navigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -108,20 +104,20 @@ public class MainActivity extends ActionBarActivity implements ScanISBNFragment.
         actionBar.setTitle(title);
     }
 
-    /**
-     * @param event standard event
-     * @see AddBook#onCreateView(LayoutInflater, ViewGroup, Bundle)
-     * called on click
-     */
-    @Subscribe
-    public void scanFragmentSelected(ScanFragmentSelectedEvent event) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment nextFragment = new ScanISBNFragment();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, nextFragment)
-                .addToBackStack((String) title)
-                .commit();
-    }
+//    /**
+//     * @param event standard event
+//     * @see AddBook#onCreateView(LayoutInflater, ViewGroup, Bundle)
+//     * called on click
+//     */
+//    @Subscribe
+//    public void scanFragmentSelected(ScanFragmentSelectedEvent event) {
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        Fragment nextFragment = new ScanISBNActivity();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.container, nextFragment)
+//                .addToBackStack((String) title)
+//                .commit();
+//    }
 
 
     @Override
@@ -154,7 +150,7 @@ public class MainActivity extends ActionBarActivity implements ScanISBNFragment.
 
     @Override
     protected void onDestroy() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(messageReciever);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
         super.onDestroy();
     }
 
@@ -179,7 +175,6 @@ public class MainActivity extends ActionBarActivity implements ScanISBNFragment.
 
     @Override
     public void onFragmentInteraction(String qrCode) {
-        Toast.makeText(this, qrCode, Toast.LENGTH_SHORT).show();
     }
 
     private class MessageReceiver extends BroadcastReceiver {
