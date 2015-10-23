@@ -199,6 +199,8 @@ public class BookService extends IntentService {
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Error ", e);
         }
+        Log.d(LOG_TAG, "service ENDED ***************************************");
+
     }
 
     private void writeBackBook(String ean, String title, String subtitle, String desc, String imgUrl) {

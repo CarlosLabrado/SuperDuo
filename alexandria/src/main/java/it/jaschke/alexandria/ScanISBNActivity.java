@@ -6,7 +6,6 @@ import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import net.sourceforge.zbar.Config;
 import net.sourceforge.zbar.Image;
@@ -124,7 +123,6 @@ public class ScanISBNActivity extends Activity {
 
                 SymbolSet syms = scanner.getResults();
                 for (Symbol sym : syms) {
-//                    scanText.setText("barcode result " + sym.getData());
                     barcodeScanned = true;
                     startValidationProcess(sym.getData());
                 }
@@ -136,7 +134,6 @@ public class ScanISBNActivity extends Activity {
      * Temporal validation process for when the user finishes scanning a QR code
      */
     private void startValidationProcess(String isbnCode) {
-        Toast.makeText(this, isbnCode, Toast.LENGTH_SHORT).show();
         Intent intent = getIntent();
         intent.putExtra(ISBN_EXTRA, isbnCode);
         setResult(RESULT_OK, intent);
@@ -146,38 +143,7 @@ public class ScanISBNActivity extends Activity {
     @Override
     public void onResume() {
         super.onResume();
-//        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.app_toolbar_title_scan_qr), null, false);
     }
-
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu, inflater);
-//        inflater.inflate(R.menu.help, menu);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.action_help_list:
-//                showDialog();
-//                return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-
-//    private void showDialog() {
-//        AlertDialog.Builder db = new AlertDialog.Builder(getActivity());
-//        db.setTitle(R.string.dialog_help_title);
-//        db.setMessage(
-//                R.string.dialog_help_message_qr);
-//        db.setNegativeButton(R.string.dialog_help_dismiss, new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface d, int arg1) {
-//                d.cancel();
-//            }
-//        });
-//        db.show();
-//    }
 
 
 }

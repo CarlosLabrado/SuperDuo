@@ -9,13 +9,14 @@
         android:layout_gravity="center_horizontal|top">
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
             android:id="@+id/eancontainer"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal">
 
             <EditText
                 android:layout_width="wrap_content"
@@ -29,11 +30,41 @@
                 android:hint="@string/input_hint"
                 android:paddingRight="20dp"/>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/scan_button"
-                android:id="@+id/scan_button"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Add"
+                    android:id="@+id/buttonAdd"
+                    android:layout_alignTop="@+id/scan_button"
+                    android:layout_alignLeft="@+id/eancontainer"
+                    android:layout_alignStart="@+id/eancontainer" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_or"
+                    android:id="@+id/textView"
+                    android:layout_gravity="center_vertical"
+                    android:layout_alignBaseline="@+id/scan_button"
+                    android:layout_alignBottom="@+id/scan_button"
+                    android:layout_centerHorizontal="true" />
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/scan_button"
+                    android:id="@+id/scan_button"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_below="@+id/eancontainer"
+                    android:layout_toRightOf="@+id/textView"
+                    android:layout_toEndOf="@+id/textView" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -41,15 +72,15 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/eancontainer"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="16dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:id="@+id/bookInfoContainer"
             tools:visibility="visible"
-            android:visibility="invisible">
+            android:visibility="invisible"
+            android:layout_below="@+id/eancontainer"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp">
 
             <TextView
                 android:layout_width="wrap_content"

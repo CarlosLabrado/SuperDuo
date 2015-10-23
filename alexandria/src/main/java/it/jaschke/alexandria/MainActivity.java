@@ -22,7 +22,7 @@ import com.squareup.otto.Bus;
 import it.jaschke.alexandria.api.Callback;
 
 
-public class MainActivity extends ActionBarActivity implements ScanISBNActivity.OnFragmentInteractionListener, NavigationDrawerFragment.NavigationDrawerCallbacks, Callback {
+public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks, Callback {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -104,21 +104,6 @@ public class MainActivity extends ActionBarActivity implements ScanISBNActivity.
         actionBar.setTitle(title);
     }
 
-//    /**
-//     * @param event standard event
-//     * @see AddBook#onCreateView(LayoutInflater, ViewGroup, Bundle)
-//     * called on click
-//     */
-//    @Subscribe
-//    public void scanFragmentSelected(ScanFragmentSelectedEvent event) {
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        Fragment nextFragment = new ScanISBNActivity();
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.container, nextFragment)
-//                .addToBackStack((String) title)
-//                .commit();
-//    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -171,10 +156,6 @@ public class MainActivity extends ActionBarActivity implements ScanISBNActivity.
                 .addToBackStack("Book Detail")
                 .commit();
 
-    }
-
-    @Override
-    public void onFragmentInteraction(String qrCode) {
     }
 
     private class MessageReceiver extends BroadcastReceiver {
