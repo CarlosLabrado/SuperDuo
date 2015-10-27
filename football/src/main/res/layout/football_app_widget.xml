@@ -1,0 +1,94 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/widget"
+    android:padding="@dimen/widget_margin">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/linearLayout2"
+        android:layout_toStartOf="@+id/linearLayout2"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:contentDescription="@string/content_desc_home_crest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/home_crest_widget" />
+
+        <TextView
+            android:contentDescription="@string/content_desc_home_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/TeamNames"
+            android:gravity="center"
+            android:text="@string/test_text"
+            android:id="@+id/home_name_widget" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout2"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:contentDescription="@string/content_desc_score"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/test_text"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="@dimen/Score"
+            android:id="@+id/score_textview_widget" />
+
+        <TextView
+            android:contentDescription="@string/content_desc_time"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/test_text"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/match_time_textview_widget" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/linearLayout2"
+        android:layout_toEndOf="@+id/linearLayout2"
+        android:layout_marginLeft="20dp">
+
+        <ImageView
+            android:contentDescription="@string/content_desc_away_crest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/away_crest_widget" />
+
+        <TextView
+            android:contentDescription="@string/content_desc_away_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/test_text"
+            android:textSize="@dimen/TeamNames"
+            android:id="@+id/away_name_widget" />
+    </LinearLayout>
+
+
+</RelativeLayout>

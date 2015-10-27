@@ -30,6 +30,8 @@ import barqsoft.footballscores.R;
  */
 public class myFetchService extends IntentService
 {
+    public static final String ACTION_DATA_UPDATED = "barqsoft.footballscores.ACTION_DATA_UPDATED";
+
     public static final String LOG_TAG = "myFetchService";
     public myFetchService()
     {
@@ -147,6 +149,8 @@ public class myFetchService extends IntentService
         final String PRIMERA_LIGA = "402";
         final String Bundesliga3 = "403";
         final String EREDIVISIE = "404";
+        final String CHAMPIONS2015_2016 = "405";
+
 
 
         final String SEASON_LINK = "http://api.football-data.org/alpha/soccerseasons/";
@@ -196,6 +200,7 @@ public class myFetchService extends IntentService
                         League.equals(SERIE_A)             ||
                         League.equals(BUNDESLIGA1)         ||
                         League.equals(BUNDESLIGA2)         ||
+                        League.equals(CHAMPIONS2015_2016) ||
                         League.equals(PRIMERA_DIVISION)     )
                 {
                     match_id = match_data.getJSONObject(LINKS).getJSONObject(SELF).
@@ -256,7 +261,29 @@ public class myFetchService extends IntentService
                     //Log.v(LOG_TAG,Home_goals);
                     //Log.v(LOG_TAG,Away_goals);
 
+//                    AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+//                    int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, FootballAppWidgetProvider.class));
+//                    int layoutId = R.layout.football_app_widget;
+//
+//                    for (int appWidgetId : appWidgetIds) {
+//                        RemoteViews views = new RemoteViews(getPackageName(), layoutId);
+//
+//                        views.setImageViewResource(R.id.home_crest_widget, Utilies.getTeamCrestByTeamName(Home));
+//                        views.setTextViewText(R.id.home_name_widget, Home);
+//
+//                        views.setTextViewText(R.id.score_textview_widget, Utilies.getScores(Integer.parseInt(Home_goals), Integer.parseInt(Away_goals)));
+//                        views.setTextViewText(R.id.match_time_textview_widget, mTime);
+//
+//                        views.setImageViewResource(R.id.away_crest_widget, Utilies.getTeamCrestByTeamName(Away));
+//                        views.setTextViewText(R.id.away_crest_widget, Away);
+//
+//                        appWidgetManager.updateAppWidget(appWidgetId, views);
+//                    }
+
+
                     values.add(match_values);
+
+
                 }
             }
             int inserted_data = 0;
@@ -266,6 +293,8 @@ public class myFetchService extends IntentService
                     DatabaseContract.BASE_CONTENT_URI,insert_data);
 
             //Log.v(LOG_TAG,"Succesfully Inserted : " + String.valueOf(inserted_data));
+//            Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED);
+//            mContext.sendBroadcast(dataUpdatedIntent);
         }
         catch (JSONException e)
         {
