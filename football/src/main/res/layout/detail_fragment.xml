@@ -10,6 +10,7 @@
         android:layout_marginTop="20dp">
 
         <TextView
+            android:contentDescription="@string/content_desc_league_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -20,6 +21,7 @@
             android:id="@+id/league_textview" />
 
         <TextView
+            android:contentDescription="@string/content_desc_match_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -45,8 +47,12 @@
             android:id="@+id/share_button"
             android:drawableLeft="@android:drawable/ic_menu_share"
             android:drawableStart="@android:drawable/ic_menu_share"
+            android:drawableRight="@android:drawable/ic_menu_share"
+            android:drawableEnd="@android:drawable/ic_menu_share"
             android:paddingLeft="120dp"
-            android:paddingRight="120dp" />
+            android:paddingStart="120dp"
+            android:paddingRight="120dp"
+            android:paddingEnd="120dp" />
     </FrameLayout>
 
 </LinearLayout>

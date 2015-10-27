@@ -12,7 +12,8 @@
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/linearLayout2"
         android:layout_toStartOf="@+id/linearLayout2"
-        android:layout_marginRight="20dp">
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp">
 
         <ImageView
             android:contentDescription="@string/content_desc_home_crest"
@@ -70,7 +71,8 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/linearLayout2"
         android:layout_toEndOf="@+id/linearLayout2"
-        android:layout_marginLeft="20dp">
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp">
 
         <ImageView
             android:contentDescription="@string/content_desc_away_crest"

@@ -45,8 +45,13 @@
     <string name="content_desc_time">Match time</string>
     <string name="content_desc_away_crest">away crest</string>
     <string name="content_desc_away_name">away name</string>
+    <string name="content_desc_about">About Layout</string>
+    <string name="content_desc_league_text">league text</string>
+    <string name="content_desc_match_day">match day text</string>
+    <string name="content_desc_about_text">about text</string>
+    <string name="content_desc_list_of_matches">list of matches</string>
+    <string name="content_desc_match_date">date</string>
 
     <string name="api_key">put your key here</string>
-
 
 </resources>

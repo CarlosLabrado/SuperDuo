@@ -11,6 +11,7 @@
     tools:context=".MainActivity$PlaceholderFragment">
 
     <ListView
+        android:contentDescription="@string/content_desc_list_of_matches"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/scores_list"

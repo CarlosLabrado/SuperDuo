@@ -19,12 +19,14 @@
             android:orientation="vertical">
 
             <ImageView
+                android:contentDescription="@string/content_desc_home_crest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:id="@+id/home_crest" />
 
             <TextView
+                android:contentDescription="@string/content_desc_home_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -41,6 +43,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:contentDescription="@string/content_desc_score"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -51,6 +54,7 @@
                 android:id="@+id/score_textview" />
 
             <TextView
+                android:contentDescription="@string/content_desc_match_date"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -68,12 +72,14 @@
             android:orientation="vertical">
 
             <ImageView
+                android:contentDescription="@string/content_desc_away_crest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:id="@+id/away_crest" />
 
             <TextView
+                android:contentDescription="@string/content_desc_away_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
